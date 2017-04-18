@@ -1,0 +1,12 @@
+external_port = 8001
+internal_port = 8002
+needs_auth = false
+network_passphrase = "Test SDF Network ; September 2015"
+
+[database]
+type = "postgres"
+url = "postgres://postgres@db/postgres?sslmode=disable"
+
+[keys]
+signing_seed = "SBEL63EBNQUTQ2ZTGHGLLXEMP6THALGS3VQ2N4RVHUWIBB5KGDJWVF3R"
+encryption_key = ""
