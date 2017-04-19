@@ -1,0 +1,10 @@
+#!/bin/bash
+# Usage: scripts/build [command]
+# Build an image for staging, production
+
+# This makes sure the script fails on the first failing command
+set -e
+
+docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
+
+export REPO_NAME=bloomsolutions/stellar-compliance
