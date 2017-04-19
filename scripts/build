@@ -1,0 +1,20 @@
+#!/bin/bash
+# Usage: scripts/build [command]
+# Build an image for staging, production
+
+# This makes sure the script fails on the first failing command
+set -e
+
+if [ -z "$TRAVIS_PULL_REQUEST_BRANCH" ]; then
+  # Push build, so name of the branch this commit is on is $TRAVIS_BRANCH
+  export BRANCH=$TRAVIS_BRANCH
+else
+  # Not a push build, assume pull request build
+  export BRANCH=$TRAVIS_PULL_REQUEST_BRANCH
+fi
+
+if [[ "$BRANCH" =~ ^master$ ]]; then
+  . ./scripts/build-prod
+else
+  . ./scripts/build-branch
+fi

@@ -1,0 +1,18 @@
+#!/bin/bash
+# Usage: scripts/build [command]
+# Build an image for staging, production
+
+# This makes sure the script fails on the first failing command
+set -e
+
+. ./scripts/build-base
+
+export GIT_REF=`git rev-parse --short --verify HEAD`
+
+docker build --rm=false \
+  --file=Dockerfile \
+  --tag=$REPO_NAME:$BRANCH-latest \
+  --tag=$REPO_NAME:$BRANCH-$GIT_REF \
+  .
+docker push $REPO_NAME:$BRANCH-latest
+docker push $REPO_NAME:$BRANCH-$GIT_REF
